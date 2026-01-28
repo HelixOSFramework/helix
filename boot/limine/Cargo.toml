@@ -1,0 +1,102 @@
+# =============================================================================
+# Helix Limine - Industrial-Grade Limine Protocol Implementation
+# =============================================================================
+# Complete, type-safe, zero-copy Limine boot protocol implementation
+# Designed as a reference implementation for Rust kernel development
+# =============================================================================
+
+[package]
+name = "helix-limine"
+version = "0.1.0"
+edition = "2021"
+authors = ["Helix OS Contributors"]
+description = "Industrial-grade Limine boot protocol implementation for Helix OS"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/helix-os/helix"
+keywords = ["os", "kernel", "limine", "bootloader", "no_std", "bare-metal"]
+categories = ["no-std", "embedded", "os", "hardware-support"]
+readme = "README.md"
+rust-version = "1.75"
+
+[lib]
+name = "helix_limine"
+path = "src/lib.rs"
+
+# =============================================================================
+# Features
+# =============================================================================
+
+[features]
+default = ["framebuffer", "smp", "memory-map"]
+
+# Core features (always available)
+# - Protocol definitions
+# - Request/response structures
+# - Basic memory map
+
+# Framebuffer support
+framebuffer = []
+
+# Symmetric Multi-Processing support
+smp = []
+
+# Memory map with advanced features
+memory-map = []
+
+# ACPI RSDP access
+acpi = []
+
+# SMBIOS table access
+smbios = []
+
+# EFI runtime services
+efi = []
+
+# Device Tree Blob parsing
+dtb = []
+
+# Module loading support
+modules = []
+
+# Kernel file access
+kernel-file = []
+
+# Boot time information
+boot-time = []
+
+# Full feature set
+full = [
+    "framebuffer",
+    "smp",
+    "memory-map",
+    "acpi",
+    "smbios",
+    "efi",
+    "dtb",
+    "modules",
+    "kernel-file",
+    "boot-time",
+]
+
+# Debug features
+debug = []
+verbose-boot = ["debug"]
+
+# =============================================================================
+# Dependencies
+# =============================================================================
+
+[dependencies]
+# heapless for fixed-capacity collections in validation
+heapless = "0.8"
+
+[dev-dependencies]
+# Testing only on host
+
+# =============================================================================
+# Build Configuration
+# =============================================================================
+
+[package.metadata.docs.rs]
+all-features = true
+targets = ["x86_64-unknown-none"]
