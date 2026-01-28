@@ -1,0 +1,28 @@
+<!-- =============================================================================
+     Helix OS - Icon Version (Square)
+     =============================================================================
+     Optimized for small sizes, app icons, favicons
+     ============================================================================= -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2"/>
+      <stop offset="100%" style="stop-color:#7B68EE"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Simplified helix for icon -->
+  <g stroke="url(#iconGrad)" stroke-width="4" fill="none" stroke-linecap="round">
+    <!-- Left curve -->
+    <path d="M 18,12 Q 12,20 16,32 Q 20,44 12,52"/>
+
+    <!-- Right curve -->
+    <path d="M 46,12 Q 52,20 48,32 Q 44,44 52,52"/>
+
+    <!-- Center bars -->
+    <line x1="18" y1="16" x2="46" y2="16" opacity="0.7"/>
+    <line x1="20" y1="26" x2="44" y2="26" opacity="0.7"/>
+    <line x1="18" y1="38" x2="46" y2="38" opacity="0.7"/>
+    <line x1="20" y1="48" x2="44" y2="48" opacity="0.7"/>
+  </g>
+</svg>
