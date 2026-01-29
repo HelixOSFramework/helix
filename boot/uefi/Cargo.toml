@@ -1,0 +1,89 @@
+[package]
+name = "helix-uefi"
+version = "0.1.0"
+edition = "2021"
+authors = ["Helix OS Contributors"]
+description = "Revolutionary UEFI boot platform for Helix OS Framework"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/helix-os/helix"
+keywords = ["uefi", "bootloader", "os", "kernel", "firmware"]
+categories = ["no-std", "os", "embedded"]
+readme = "README.md"
+
+[lib]
+crate-type = ["staticlib", "rlib"]
+
+[[bin]]
+name = "helix-uefi-boot"
+path = "src/bin/main.rs"
+
+[dependencies]
+# No external dependencies - pure Rust UEFI implementation
+# Everything is implemented from scratch for maximum control
+
+[dev-dependencies]
+
+[features]
+default = ["x86_64", "gop", "filesystem", "acpi", "smbios", "security"]
+
+# Architecture support
+x86_64 = []
+aarch64 = []
+riscv64 = []
+
+# Protocol support
+gop = []                    # Graphics Output Protocol
+simple_text = []            # Simple Text I/O
+filesystem = []             # File System protocols
+block_io = []               # Block I/O protocol
+pci = []                    # PCI protocol
+usb = []                    # USB protocols
+network = []                # Network protocols
+serial = []                 # Serial I/O
+
+# Hardware tables
+acpi = []                   # ACPI table parsing
+smbios = []                 # SMBIOS table parsing
+dtb = []                    # Device Tree Blob (ARM)
+
+# Security features
+security = []               # Enable all security features
+secure_boot = ["security"]  # Secure Boot validation
+measured_boot = ["security"] # TPM measured boot
+signature_verify = ["security"] # Signature verification
+
+# Advanced features
+smp = []                    # Multi-processor support
+numa = []                   # NUMA topology
+rng = []                    # Hardware RNG
+watchdog = []               # Watchdog timer
+
+# Debug features
+debug_output = []           # Debug output to serial/console
+verbose = ["debug_output"]  # Verbose logging
+trace = ["verbose"]         # Trace-level logging
+
+# Full feature set
+full = [
+    "x86_64", "aarch64",
+    "gop", "simple_text", "filesystem", "block_io", "pci", "serial",
+    "acpi", "smbios",
+    "security", "secure_boot", "measured_boot",
+    "smp", "numa", "rng",
+    "debug_output"
+]
+
+[profile.dev]
+panic = "abort"
+opt-level = 1
+
+[profile.release]
+panic = "abort"
+lto = true
+opt-level = "z"
+codegen-units = 1
+strip = true
+
+[package.metadata.docs.rs]
+all-features = true
+targets = ["x86_64-unknown-uefi", "aarch64-unknown-uefi"]
