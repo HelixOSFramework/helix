@@ -315,56 +315,96 @@ cargo build --release -p helix-myos --target x86_64-unknown-none
 
 ## 📁 Project Structure
 
-\`\`\`
+<div align="center">
+
+### A modular, component-based architecture
+
+*For detailed documentation, see [docs/PROJECT_STRUCTURE.md](docs/PROJECT_STRUCTURE.md)*
+
+</div>
+
+<table>
+<tr>
+<td valign="top" width="50%">
+
+### 🎯 Core Components
+
+```
 helix/
+├─ 🥾 boot/
+│  ├─ limine/
+│  ├─ multiboot2/
+│  └─ uefi/
 │
-├── 🥾 boot/                    # Boot protocols
-│   ├── limine/                 #   └─ Limine bootloader
-│   ├── multiboot2/             #   └─ Multiboot2 standard
-│   └── uefi/                   #   └─ Native UEFI (134K lines!)
+├─ 💎 core/
+│  ├─ orchestrator/
+│  ├─ interrupts/
+│  ├─ syscall/
+│  └─ ipc/
 │
-├── 🔧 hal/                     # Hardware Abstraction Layer
-│   └── arch/                   #   └─ Architecture-specific
-│       ├── x86_64/             #       ├─ Intel/AMD 64-bit
-│       ├── aarch64/            #       ├─ ARM 64-bit
-│       └── riscv64/            #       └─ RISC-V 64-bit
+├─ 🔧 hal/
+│  └─ arch/
+│     ├─ x86_64/
+│     ├─ aarch64/
+│     └─ riscv64/
 │
-├── 💎 core/                    # Kernel Core (Orchestrator)
-│   ├── orchestrator/           #   ├─ Main dispatcher
-│   ├── interrupts/             #   ├─ Interrupt handling
-│   ├── syscall/                #   ├─ System call table
-│   └── ipc/                    #   └─ Inter-process communication
+└─ ⚙️ subsystems/
+   ├─ execution/
+   ├─ memory/
+   ├─ dis/
+   └─ ai/
+```
+
+</td>
+<td valign="top" width="50%">
+
+### 🔌 Extensions & Tools
+
+```
+helix/
+├─ 📦 modules/
+│  ├─ loader.rs
+│  ├─ hot_reload.rs
+│  └─ registry.rs
 │
-├── ⚙️ subsystems/              # Kernel subsystems
-│   ├── execution/              #   ├─ Processes, threads, scheduling
-│   ├── memory/                 #   ├─ Virtual memory, paging
-│   ├── dis/                    #   ├─ Distributed Intent System (AI)
-│   └── ai/                     #   └─ Artificial intelligence module
+├─ 🗂️ fs/
+│  ├─ tree/
+│  ├─ journal/
+│  ├─ snapshot/
+│  └─ crypto/
 │
-├── 📦 modules/                 # Module system
-│   ├── loader.rs               #   ├─ Dynamic loader
-│   ├── hot_reload.rs           #   ├─ Hot-reload support
-│   └── registry.rs             #   └─ Module registry
+├─ 🎯 profiles/
+│  └─ minimal/
 │
-├── 🗂️ fs/                      # HelixFS filesystem
-│   ├── tree/                   #   ├─ B+ Tree storage
-│   ├── journal/                #   ├─ Journaling
-│   ├── snapshot/               #   ├─ CoW snapshots
-│   └── crypto/                 #   └─ Built-in encryption
-│
-├── 🎯 profiles/                # Preconfigured OS profiles
-│   └── minimal/                #   └─ Minimal configuration
-│
-├── 📚 docs/                    # Complete documentation
-│   ├── ARCHITECTURE.md
-│   ├── MODULE_GUIDE.md
-│   └── OS_BUILDER_GUIDE.md
-│
-└── 🛠️ scripts/                 # Build/run scripts
-    ├── build.sh
-    ├── run_qemu.sh
-    └── test.sh
-\`\`\`
+├─ 📚 docs/
+├─ 🛠️ scripts/
+└─ 📦 target/
+```
+
+</td>
+</tr>
+</table>
+
+<details>
+<summary><b>📖 Component Descriptions</b> (click to expand)</summary>
+
+<br/>
+
+| Component | Purpose | Key Features |
+|-----------|---------|--------------|
+| **🥾 boot/** | Boot protocols & loaders | Limine, Multiboot2, UEFI (134K lines) |
+| **💎 core/** | Kernel orchestrator | Interrupt routing, syscall dispatch, IPC |
+| **🔧 hal/** | Hardware abstraction | Multi-arch support (x86_64, ARM, RISC-V) |
+| **⚙️ subsystems/** | Pluggable subsystems | Scheduler, memory, AI modules |
+| **📦 modules/** | Module runtime | Dynamic loading, hot-reload support |
+| **🗂️ fs/** | HelixFS implementation | B+Tree, journaling, CoW, encryption |
+| **🎯 profiles/** | OS configurations | Pre-built kernel profiles |
+| **📚 docs/** | Documentation | Architecture, guides, API reference |
+| **🛠️ scripts/** | Build & test tools | `build.sh`, `run_qemu.sh`, `test.sh` |
+
+</details>
+
+
 
 <br/>
 
