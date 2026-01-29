@@ -1,0 +1,42 @@
+# =============================================================================
+# Helix Multiboot2 - Revolutionary Boot Protocol Implementation
+# =============================================================================
+# Zero-copy, type-safe, compile-time validated Multiboot2 implementation
+# =============================================================================
+
+[package]
+name = "helix-multiboot2"
+version = "0.1.0"
+edition = "2021"
+authors = ["Helix OS Team"]
+description = "Revolutionary type-safe Multiboot2 implementation for Helix OS"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/helix-os/helix"
+keywords = ["os", "kernel", "multiboot2", "bootloader", "no_std"]
+categories = ["no-std", "embedded", "os"]
+readme = "README.md"
+
+[lib]
+name = "helix_multiboot2"
+path = "src/lib.rs"
+
+[features]
+default = []
+# Enable framebuffer parsing
+framebuffer = []
+# Enable ELF sections parsing
+elf_sections = []
+# Enable ACPI table parsing
+acpi = []
+# Enable all optional features
+full = ["framebuffer", "elf_sections", "acpi"]
+# Compile-time header generation
+header_gen = []
+# Debug assertions for development
+debug_validation = []
+
+[dependencies]
+# No dependencies - pure no_std implementation
+
+[dev-dependencies]
+# For testing on host
