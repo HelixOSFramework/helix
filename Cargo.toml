@@ -26,6 +26,8 @@ members = [
     "subsystems/dis",
     "subsystems/userspace",
     "subsystems/ai",
+    "subsystems/relocation",
+    "subsystems/nexus",
 
     # Module System
     "modules",
