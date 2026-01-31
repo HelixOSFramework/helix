@@ -21,6 +21,9 @@ path = "src/bin/main.rs"
 # No external dependencies - pure Rust UEFI implementation
 # Everything is implemented from scratch for maximum control
 
+# Relocation subsystem for PIE kernels
+helix-relocation = { path = "../../subsystems/relocation", features = ["x86_64", "kaslr", "uefi"], optional = true }
+
 [dev-dependencies]
 
 [features]
@@ -57,6 +60,7 @@ smp = []                    # Multi-processor support
 numa = []                   # NUMA topology
 rng = []                    # Hardware RNG
 watchdog = []               # Watchdog timer
+relocation = ["dep:helix-relocation"]  # PIE kernel relocation support
 
 # Debug features
 debug_output = []           # Debug output to serial/console
