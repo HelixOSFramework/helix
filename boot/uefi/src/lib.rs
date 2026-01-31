@@ -61,10 +61,6 @@
 
 extern crate alloc;
 
-use alloc::vec;
-use alloc::vec::Vec;
-use alloc::string::String;
-use alloc::format;
 
 // =============================================================================
 // MODULES
@@ -101,6 +97,11 @@ pub mod security;
 ///
 /// Safe abstractions for UEFI memory management.
 pub mod memory;
+
+/// Kernel relocation support
+///
+/// PIE kernel relocation and KASLR integration.
+pub mod relocation;
 
 /// Kernel loading
 ///
